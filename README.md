@@ -35,3 +35,48 @@ end)
 Relay:fire(key1, "Player1", 1000)
 Relay:fire(key1, "Player1", {50000, 136})
 ```
+
+---
+
+You can communicate between different scripts:
+
+## Example 1
+
+### Script 1
+```lua
+local Relay = require(script.Parent.Relay)
+
+task.wait() -- To make sure that the listener has loaded first.
+
+Relay:fire("ReceiveMessage", "Hello from the another script!!")
+```
+
+### Script 2
+```lua
+local Relay = require(script.Parent.Relay)
+
+Relay:on("ReceiveMessage", function(message: string)
+	print("Received message:", message)
+end)
+```
+
+## Example 2
+
+### Script 1
+```lua
+local Relay = require(script.Parent.Relay)
+
+task.wait() -- To make sure that the listener has loaded first.
+
+local money = Relay:request("Money", 100, 1000) -- Key, Min, Max
+print(money)
+```
+
+### Script 2
+```lua
+local Relay = require(script.Parent.Relay)
+
+Relay:handleRequest("Money", function(min: number, max: number)
+	return math.random(min, max)
+end)
+```
