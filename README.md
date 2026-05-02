@@ -5,7 +5,7 @@
 <div align="left">
 
 # What is Relay?
-Relay is a powerfull communication module that allows you to pass on information from one script to another
+Relay is a powerfull communication module that allows you to pass on information from one script to another.
 
 ## Example code:
 ```lua
